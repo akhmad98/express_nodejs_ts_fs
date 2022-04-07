@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+    postgres:
+        image: 'postgres:13.2'
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        networks:
+            - app_net
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres123
+            POSTGRES_DB: smartstaff
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8900:8080
+        networks:
+            - app_net                
+networks:
+    app_net:
+        driver: bridge            
